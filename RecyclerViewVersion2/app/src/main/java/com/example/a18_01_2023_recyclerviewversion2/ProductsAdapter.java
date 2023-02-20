@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
-    Product product;
+
     TextView txtTitle, txtPrice;
     ImageView productImageView;
     ArrayList<Product> products;
@@ -25,20 +25,32 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder{
+        Product product;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
+            product = products.get(getAdapterPosition());
             productImageView = itemView.findViewById(R.id.productImageView);
-           /* productImageView.setOnClickListener(new View.OnClickListener() {
+            /*productImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(),ProductDetailsActivity.class);
-                    intent.putExtra("id",product.id);
-                    intent.putExtra("title",product.title);
-                    intent.putExtra("price",product.price);
-                    intent.putExtra("imageId",product.imageId);
+                      *//*  intent.putExtra("id",product.getId());
+                        intent.putExtra("title",product.getTitle());
+                        intent.putExtra("price",product.getPrice());
+                        intent.putExtra("imageId",product.getImageId());*//*
+                        intent.putExtra("product",product);
                     v.getContext().startActivity(intent);
                 }
             });*/
+
+            itemView.findViewById(R.id.txtTitle).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(),ProductDetailsActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
@@ -49,13 +61,29 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View productView = layoutInflater.inflate(R.layout.product_view,null);
         productImageView = productView.findViewById(R.id.productImageView);
+        txtTitle = productView.findViewById(R.id.txtTitle);
+        txtPrice = productView.findViewById(R.id.txtPrice);
 
-        productImageView.setOnClickListener(new View.OnClickListener() {
+       /* productImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Image Clicked"+"--"+""+product.imageId, Toast.LENGTH_LONG).show();
+                Toast.makeText(v.getContext(), "Image Clicked"+"--", Toast.LENGTH_LONG).show();
             }
         });
+
+        txtTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Title Clicked",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        txtPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Price Clicked",Toast.LENGTH_LONG).show();
+            }
+        });*/
         return new ProductViewHolder(productView);
     }
 
@@ -63,17 +91,35 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = products.get(position);
-            /*holder.itemView.findViewById(R.id.productImageView).setOnClickListener(
+        productImageView = holder.itemView.findViewById(R.id.productImageView);
+        txtTitle = holder.itemView.findViewById(R.id.txtTitle);
+        txtPrice = holder.itemView.findViewById(R.id.txtPrice);
+
+        productImageView.setImageResource(product.getImageId());
+        txtTitle.setText(product.getTitle());
+        txtPrice.setText(product.getPrice()+"");
+
+       /* holder.itemView.findViewById(R.id.productImageView).setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(v.getContext(), "ImageClicked"+"---"+product.imageId, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(v.getContext(), "ImageClicked"+"---"+product.getImageId(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-            );*/
-        productImageView = holder.itemView.findViewById(R.id.productImageView);
-        productImageView.setImageResource(product.imageId);
+                    });
 
+        txtTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Title Clicked"+"---"+product.getTitle(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+        txtPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Price Clicked" + "---"+product.getPrice(),Toast.LENGTH_LONG).show();
+            }
+        });*/
 
 
     }

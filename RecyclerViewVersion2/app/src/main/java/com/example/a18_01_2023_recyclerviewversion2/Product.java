@@ -1,6 +1,8 @@
 package com.example.a18_01_2023_recyclerviewversion2;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     int id;
     int imageId;
     int price;

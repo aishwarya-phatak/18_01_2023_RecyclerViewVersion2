@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initProducts(){
         products = new ArrayList<Product>();
-        for(int i = 0; i<5;i++) {
+        for(int i = 0; i<10;i++) {
             products.add(
                     new Product(
                             i,
-                            i,
+                            R.drawable.ic_launcher_background,
                             i *500 + 103,
                             "Product" + i
                     )
